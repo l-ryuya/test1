@@ -18,7 +18,8 @@ jobs:
       - run: |
           VPC_ID="vpc-09cfd7c0d10b311f5"
           if aws ec2 describe-vpcs --vpc-ids $VPC_ID > /dev/null 2>&1; then
-            echo "VPC $VPC_ID exists."
+            echo "VPC $VPC_ID ありました下記詳細です."
+            aws ec2 describe-vpcs --vpc-ids $VPC_ID
           else
-            echo "VPC $VPC_ID does NOT exist."
+            echo "VPC $VPC_ID ありません."
           fi
