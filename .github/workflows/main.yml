@@ -16,6 +16,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
       - run: |
+          VPC_ID="vpc-09cfd7c0d10b311f5"
           if aws ec2 describe-vpcs --vpc-ids $VPC_ID > /dev/null 2>&1; then
             echo "VPC $VPC_ID exists."
           else
