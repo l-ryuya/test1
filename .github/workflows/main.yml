@@ -1,0 +1,13 @@
+name: aws_access_check
+
+on: [push]
+
+jobs:
+  aws_access:
+    runs-on: ubuntu-latest
+    steps:
+      - name: github clone
+        uses: actions/checkout@v4
+
+      - name: ls_check
+        run: ls -laR
