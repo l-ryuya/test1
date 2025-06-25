@@ -9,5 +9,11 @@ jobs:
       - name: github clone
         uses: actions/checkout@v4
 
-      - name: ls_check
-        run: ls -laR
+      - name: aws_access
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+      - run: |
+          aws ec2 describe-vpcs --vpc-ids vpc-09cfd7c0d10b311f5
