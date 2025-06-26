@@ -36,12 +36,16 @@ resource "aws_route_table" "dougbako_route_table" {
     Name = "dougbako_route_table"
   }
 }
-resource "aws_main_route_table_association" "dougbako_vpc_attache_a" {
-  vpc_id         = aws_vpc.dougbako_vpc.id
-  route_table_id = aws_route_table.dougbako_route_table.id
-}
-resource "aws_route_table_association" "dougbako_subnet_attache_a" {
-  subnet_id      = aws_subnet.dougbako_subnet.id
-  route_table_id = aws_route_table.dougbako_route_table.id
+
+data "aws_route_table" "dougbako_main_route_table" {
+  vpc_id = aws_vpc.dougbako_vpc.id
+  filter {
+    name   = "association.main"
+    values = ["true"]
+  }
 }
 
+resource "aws_route_table_association" "dougbako_subnet_attache_a" {
+  subnet_id      = aws_subnet.dougbako_subnet.id
+  route_table_id = data.aws_route_table.dougbako_main_route_table.id
+}
