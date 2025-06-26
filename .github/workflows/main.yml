@@ -20,7 +20,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - run: |
-          if aws ec2 describe-vpcs --filter "Name=dougbako" > /dev/null 2>&1; then
+          if aws ec2 describe-vpcs --filter "Name=tag:Name,Values=dougbako" > /dev/null 2>&1; then
           echo "ありました";
           else
           echo "ありませんでした";
