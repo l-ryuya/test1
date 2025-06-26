@@ -20,7 +20,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - run: terraform init
-      - name: VPC検索
+      - name: AWS既存resourceチェック
         run: |
           sh aws_resource_check.sh
 
