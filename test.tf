@@ -24,24 +24,29 @@ resource "aws_internet_gateway" "dougbako_gw" {
   }
 }
 
-resource "aws_route_table" "dougbako_route_table" {
-  vpc_id = aws_vpc.dougbako_vpc.id
+# resource "aws_route_table" "dougbako_route_table" {
+#   vpc_id = aws_vpc.dougbako_vpc.id
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.dougbako_gw.id
-  }
+#   route {
+#     cidr_block = "0.0.0.0/0"
+#     gateway_id = aws_internet_gateway.dougbako_gw.id
+#   }
 
-  tags = {
-    Name = "dougbako_route_table"
-  }
-}
+#   tags = {
+#     Name = "dougbako_route_table"
+#   }
+# }
 
 data "aws_route_table" "dougbako_main_route_table" {
   vpc_id = aws_vpc.dougbako_vpc.id
   filter {
     name   = "association.main"
     values = ["true"]
+  }
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.dougbako_gw.id
   }
 }
 
