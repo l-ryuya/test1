@@ -19,6 +19,13 @@ jobs:
       - name: Terraformのセットアップ
         uses: hashicorp/setup-terraform@v3
 
-      - run: terraform init
-      - run: terraform plan
-      - run: terraform apply -auto-approve
+      - run: |
+          if aws ec2 describe-vpcs --filter "Name=dougbako" > /dev/null 2>&1; then
+          echo "ありました";
+          else
+          echo "ありませんでした";
+          fi
+
+      # - run: terraform init
+      # - run: terraform plan
+      # - run: terraform apply -auto-approve
