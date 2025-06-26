@@ -26,6 +26,8 @@ jobs:
           if [ "$VPC_ID" != "None" ]; then
             echo "既存のVPC($VPC_ID)をimportします"
             terraform import aws_vpc.dougbako_vpc $VPC_ID
+          else
+            echo "VPCがないので作成します"
           fi
 
       - run: terraform plan
