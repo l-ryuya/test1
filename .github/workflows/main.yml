@@ -22,13 +22,7 @@ jobs:
       - run: terraform init
       - name: VPC検索
         run: |
-          VPC_ID=$(aws ec2 describe-vpcs --filters "Name=tag:Name,Values=dougbako" --query "Vpcs[0].VpcId" --output text 2>/dev/null)
-          if [ "$VPC_ID" != "None" ]; then
-            echo "既存のVPC($VPC_ID)をimportします"
-            terraform import aws_vpc.dougbako_vpc $VPC_ID
-          else
-            echo "VPCがないので作成します"
-          fi
+          sh aws_resource_check.sh
 
       - run: terraform plan
       - run: terraform apply -auto-approve
