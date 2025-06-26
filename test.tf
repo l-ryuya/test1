@@ -30,11 +30,12 @@ data "aws_route_table" "dougbako_main_route_table" {
     name   = "association.main"
     values = ["true"]
   }
+}
 
-  # route {
-  #   cidr_block = "0.0.0.0/0"
-  #   gateway_id = aws_internet_gateway.dougbako_gw.id
-  # }
+resource "aws_route" "internet_access" {
+  route_table_id         = data.aws_route_tables.main.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.dougbako_gw.id
 }
 
 resource "aws_route_table_association" "dougbako_subnet_attache_a" {
