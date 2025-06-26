@@ -25,7 +25,6 @@ jobs:
           terraform init
 
       - name: AWS既存resourceチェック
-        working-directory: terraform
         run: |
           sh aws_resource_check.sh
 
