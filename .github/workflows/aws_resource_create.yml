@@ -23,7 +23,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: terraform init
-        working-directory: terraform
+        working-directory: terraform/resource
         run: |
           terraform init
 
@@ -32,9 +32,9 @@ jobs:
           sh aws_resource_check.sh
 
       - name: terraform plan
-        working-directory: terraform
+        working-directory: terraform/resource
         run: terraform plan -var="aws_region=${{secrets.AWS_REGION}}"
 
       - name: terraform apply
-        working-directory: terraform
+        working-directory: terraform/resource
         run: terraform apply -auto-approve -var="aws_region=${{secrets.AWS_REGION}}"

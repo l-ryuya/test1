@@ -27,11 +27,11 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform init
-        working-directory: terraform
+        working-directory: terraform/repository
         run: terraform init
 
       - name: Terraform apply (ECRリポジトリ作成のみ)
-        working-directory: terraform
+        working-directory: terraform/repository
         run: |
           terraform apply -auto-approve \
             -var="aws_region=${{ secrets.AWS_REGION }}" \
