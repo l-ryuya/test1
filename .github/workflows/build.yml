@@ -1,10 +1,9 @@
-name: aws_access_check
-
 on:
   push:
     paths:
       - 'terraform/repository/**'
       - 'docker/**'
+      - '.github/workflows/build.yml'
 
 jobs:
   aws_access:
