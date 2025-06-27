@@ -1,6 +1,9 @@
 name: aws_access_check
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'terraform/**'
 
 jobs:
   aws_access:
