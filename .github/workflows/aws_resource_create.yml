@@ -1,9 +1,10 @@
-name: aws_access_check
+name: AWSサービス作成
 
 on:
   push:
     paths:
       - 'terraform/resource/**'
+      - '.github/workflows/aws_resource_create.yml'
 
 jobs:
   aws_access:
