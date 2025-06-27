@@ -3,7 +3,7 @@ name: aws_access_check
 on:
   push:
     paths:
-      - 'terraform/**'
+      - 'terraform/resource/**'
 
 jobs:
   aws_access:
