@@ -7,22 +7,16 @@ resource "aws_security_group" "sample_security_group" {
   tags = {
     Name = "sample_security_group"
   }
-}
-
-# sshインバウンドルール定義
-resource "aws_vpc_security_group_ingress_rule" "allow_ssh_ipv4" {
-  security_group_id = aws_security_group.sample_security_group.id
-  cidr_ipv4         = var.aws_vpc_security_group_ssh
-  from_port         = 22
-  ip_protocol       = "tcp"
-  to_port           = 22
-}
-
-# httpインバウンドルール
-resource "aws_vpc_security_group_ingress_rule" "allow_http_ipv4" {
-  security_group_id = aws_security_group.sample_security_group.id
-  cidr_ipv4         = var.aws_vpc_security_group_http
-  from_port         = 80
-  ip_protocol       = "tcp"
-  to_port           = 80
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = [var.aws_vpc_security_group_http]
+  }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [var.aws_vpc_security_group_ssh]
+  }
 }
