@@ -13,9 +13,9 @@ on:
 #       - completed
 
 jobs:
-  aws_access:
+  aws_resource_create:
     runs-on: ubuntu-latest
-    # if: ${{github.event.workflow_run.conclusion == 'success'}}
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
     steps:
       - name: github clone
         uses: actions/checkout@v4
@@ -36,6 +36,7 @@ jobs:
           terraform init
 
       - name: AWS既存resourceチェック
+        working-directory: terraform/resource
         run: |
           sh aws_resource_check.sh
 
