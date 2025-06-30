@@ -45,7 +45,7 @@ jobs:
             echo "ECRがないので作成します"
           fi
 
-      - name: Terraform init
+      - name: Terraform plan
         working-directory: terraform/ecr
         run: terraform plan
 

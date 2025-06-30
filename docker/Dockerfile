@@ -8,19 +8,36 @@ RUN cd /etc/apache2/mods-enabled \
 ADD php.ini /usr/local/etc/php/
 ADD 000-default.conf /etc/apache2/sites-enabled/
 
-#  Laravelなどで使うPHP拡張と依存ライブラリをインストール
 RUN apt-get update \
   && apt-get install -y \
-  git \
-  zip unzip \
-  libzip-dev \
-  vim \
-  libpng-dev libjpeg-dev \
-  libfreetype6-dev \
-  libpq-dev \
-  libonig-dev \
+    git \
+    zip unzip \
+    libzip-dev \
+    vim \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    libpq-dev \
+    libonig-dev \
+    libxml2-dev \
+  && docker-php-ext-configure zip \
+  && docker-php-ext-configure gd --with-freetype --with-jpeg \
   && docker-php-ext-install \
-  pdo pdo_mysql mysqli zip
+    pdo pdo_mysql mysqli zip gd
+
+# #  Laravelなどで使うPHP拡張と依存ライブラリをインストール
+# RUN apt-get update \
+#   && apt-get install -y \
+#   git \
+#   zip unzip \
+#   libzip-dev \
+#   vim \
+#   libpng-dev libjpeg-dev \
+#   libfreetype6-dev \
+#   libpq-dev \
+#   libonig-dev \
+#   && docker-php-ext-install \
+#   pdo pdo_mysql mysqli zip
 
 #  GD（画像処理ライブラリ）をJPEG/Freetype対応でビルド
 RUN docker-php-ext-configure gd \
