@@ -32,7 +32,6 @@ jobs:
 
       - name: リポジトリ確認
         run: |
-          cd ecr
           ECR_NAME=$(aws ecr describe-repositories --query "repositories[?repositoryName=='sample_repository'].repositoryName" --output text)
           if [ "$ECR_NAME" != "" ]; then
             echo "既存のECR($ECR_NAME)をimportします"
