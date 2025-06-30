@@ -29,6 +29,11 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         id: login-ecr
 
+
+      - name: Terraform init
+        working-directory: terraform/ecr
+        run: terraform init
+
       - name: リポジトリ確認
         working-directory: terraform/ecr
         run: |
@@ -39,10 +44,6 @@ jobs:
           else
             echo "ECRがないので作成します"
           fi
-
-      - name: Terraform init
-        working-directory: terraform/ecr
-        run: terraform init
 
       - name: Terraform init
         working-directory: terraform/ecr
