@@ -25,12 +25,17 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: ecrログイン
+        uses: aws-actions/amazon-ecr-login@v1
+        id: login-ecr
+
+
       - name: リポジトリ確認
         run: |
-          ECR_ID=$(aws ec2 describe-vpcs --filter "Name=tag:Name,Values=sample_repository" --query "Vpcs[0].VpcId" --output text 2> /dev/null)
+          ECR_NAME=$(aws ecr describe-repositories   --query "repositories[?repositoryName=='sample_repository'].repositoryName" --output text
             if [ "$ECR_ID" != "None" ]; then
               echo "既存のECR($ECR_ID)をimportします"
-              terraform import aws_ecr_repository.sample_repository $ECR_ID
+              terraform import aws_ecr_repository.sample_repository $ECR_NAME
             else
               echo "ECRがないので作成します"
             fi
@@ -47,10 +52,6 @@ jobs:
         working-directory: terraform/ecr
         run: |
           terraform apply -auto-approve
-
-      - name: ecrログイン
-        uses: aws-actions/amazon-ecr-login@v1
-        id: login-ecr
 
       - name: Build and Push Docker image
         env:
