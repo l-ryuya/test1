@@ -15,8 +15,8 @@ SUBNET_ID=$(aws ec2 describe-subnets --filter "Name=tag:Name,Values=sample_subne
     echo "既存のサブネットがないので作成します"
   fi
 
-SECURITY_GROUP_ID=$(aws ec2 describe-security-groups   --filters Name=tag:Name,Values=sample_security_group --query "SecurityGroups[*].GroupId" --output text 2> /dev/null)
-  if [ "$SECURITY_GROUP_ID" != "None" ]; then
+SECURITY_GROUP_ID=$(aws ec2 describe-security-groups --filters Name=tag:Name,Values=sample_security_group --query "SecurityGroups[*].GroupId" --output text 2> /dev/null)
+  if [ "$SECURITY_GROUP_ID" != "" || "$SECURITY_GROUP_ID" != "None" ]; then
     echo "既存のセキュリティグループ($SECURITY_GROUP_ID)をimportします"
     terraform import aws_security_group.sample_security_group $SECURITY_GROUP_ID
   else
@@ -24,7 +24,7 @@ SECURITY_GROUP_ID=$(aws ec2 describe-security-groups   --filters Name=tag:Name,V
   fi
 
 INTERNET_GW_ID=$(aws ec2 describe-internet-gateways --filters Name=tag:Name,Values=sample_gw --query "InternetGateways[*].InternetGatewayId" --output text 2> /dev/null)
-  if [ "$INTERNET_GW_ID" != "None" ]; then
+  if [ "$INTERNET_GW_ID" != "" || "$INTERNET_GW_ID" != "None" ]; then
     echo "既存のインターネットゲートウェイ($INTERNET_GW_ID)をimportします"
     terraform import aws_internet_gateway.sample_gw $INTERNET_GW_ID
   else
