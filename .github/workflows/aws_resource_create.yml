@@ -15,7 +15,7 @@ on:
 jobs:
   aws_access:
     runs-on: ubuntu-latest
-    if: ${{github.event.workflow_run.conclusion == 'success'}}
+    # if: ${{github.event.workflow_run.conclusion == 'success'}}
     steps:
       - name: github clone
         uses: actions/checkout@v4
