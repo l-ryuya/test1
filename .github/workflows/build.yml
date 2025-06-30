@@ -32,7 +32,7 @@ jobs:
 
       - name: リポジトリ確認
         run: |
-          ECR_NAME=$(aws ecr describe-repositories   --query "repositories[?repositoryName=='sample_repository'].repositoryName" --output text
+          ECR_NAME=$(aws ecr describe-repositories -query "repositories[?repositoryName=='sample_repository'].repositoryName" --output text)
             if [ "$ECR_ID" != "None" ]; then
               echo "既存のECR($ECR_ID)をimportします"
               terraform import aws_ecr_repository.sample_repository $ECR_NAME
