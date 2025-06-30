@@ -6,6 +6,7 @@ on:
       - 'docker/**'
       - '.github/workflows/build.yml'
       - '.github/workflows/aws_resource_create.yml'
+      - 'aws_resource_check.sh'
 jobs:
   aws_access:
     runs-on: ubuntu-latest
