@@ -25,20 +25,6 @@ RUN apt-get update \
   && docker-php-ext-install \
     pdo pdo_mysql mysqli zip gd
 
-# #  Laravelなどで使うPHP拡張と依存ライブラリをインストール
-# RUN apt-get update \
-#   && apt-get install -y \
-#   git \
-#   zip unzip \
-#   libzip-dev \
-#   vim \
-#   libpng-dev libjpeg-dev \
-#   libfreetype6-dev \
-#   libpq-dev \
-#   libonig-dev \
-#   && docker-php-ext-install \
-#   pdo pdo_mysql mysqli zip
-
 #  GD（画像処理ライブラリ）をJPEG/Freetype対応でビルド
 RUN docker-php-ext-configure gd \
   --with-freetype=/usr/include/ \

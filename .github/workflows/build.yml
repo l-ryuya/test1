@@ -29,7 +29,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         id: login-ecr
 
-
       - name: Terraform init
         working-directory: terraform/ecr
         run: terraform init
