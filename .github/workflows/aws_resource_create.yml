@@ -14,6 +14,8 @@ on:
 jobs:
   aws_resource_create:
     runs-on: ubuntu-latest
+    env:
+      TF_VAR_aws_region: ${{ secrets.AWS_REGION }}
     # if: ${{github.event.workflow_run.conclusion == 'success'}}
     steps:
       - name: github clone
