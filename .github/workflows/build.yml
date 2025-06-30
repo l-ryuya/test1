@@ -29,8 +29,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         id: login-ecr
 
-
       - name: リポジトリ確認
+        working-directory: terraform/ecr
         run: |
           ECR_NAME=$(aws ecr describe-repositories --query "repositories[?repositoryName=='sample_repository'].repositoryName" --output text)
           if [ "$ECR_NAME" != "" ]; then
