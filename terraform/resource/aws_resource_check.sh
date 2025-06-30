@@ -1,7 +1,7 @@
 #!/bin/bash
 
 VPC_ID=$(aws ec2 describe-vpcs --filter "Name=tag:Name,Values=sample_vpc" --query "Vpcs[0].VpcId" --output text 2>/dev/null)
-if [ -n "$VPC_ID" ] then
+if [ -n "$VPC_ID" ]; then
   echo "既存のVPC($VPC_ID)をimportします"
   terraform import aws_vpc.sample_vpc "$VPC_ID"
 else
