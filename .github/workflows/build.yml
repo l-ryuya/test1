@@ -2,7 +2,7 @@ name: DockerfileのbuildからECRへプッシュ
 on:
   push:
     paths:
-      - 'terraform/repository/**'
+      - 'terraform/ecr/**'
       - 'docker/**'
       - '.github/workflows/build.yml'
 jobs:
@@ -26,11 +26,15 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform init
-        working-directory: terraform/repository
+        working-directory: terraform/ecr
         run: terraform init
 
+      - name: Terraform init
+        working-directory: terraform/ecr
+        run: terraform plan
+
       - name: Terraform apply (ECRリポジトリ作成のみ)
-        working-directory: terraform/repository
+        working-directory: terraform/ecr
         run: |
           terraform apply -auto-approve \
             -target="aws_ecr_repository.sample_repository"
