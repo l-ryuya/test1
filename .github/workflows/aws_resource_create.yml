@@ -1,10 +1,8 @@
 name: AWSサービス作成
 
 on:
-  push:
-    paths:
-      - 'terraform/resource/**'
-      - '.github/workflows/aws_resource_create.yml'
+  workflow_run:
+    workflows: [DockerfileのBuildとECRリポジトリ作成＆Push]
 
 jobs:
   aws_access:
