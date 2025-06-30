@@ -36,8 +36,7 @@ jobs:
       - name: Terraform apply (ECRリポジトリ作成のみ)
         working-directory: terraform/ecr
         run: |
-          terraform apply -auto-approve \
-            -target="aws_ecr_repository.sample_repository"
+          terraform apply -auto-approve
 
       - name: ecrログイン
         uses: aws-actions/amazon-ecr-login@v1
