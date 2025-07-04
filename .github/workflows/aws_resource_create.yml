@@ -39,6 +39,7 @@ jobs:
       # - name: AWS既存resourceチェック
       #   working-directory: terraform/resource
       #   run: |
+      
       #     sh aws_resource_check.sh
 
       - name: terraform plan
