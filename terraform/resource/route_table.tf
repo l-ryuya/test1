@@ -1,5 +1,4 @@
 # ルートテーブルの宛先指定
-
 resource "aws_route" "internet_access" {
   route_table_id         = data.aws_route_table.sample_main_route_table.id
   destination_cidr_block = var.aws_route_cidr_block

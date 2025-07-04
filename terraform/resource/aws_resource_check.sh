@@ -36,7 +36,7 @@ fi
 MAIN_ROUTE_ID=$(aws ec2 describe-route-tables --filters "Name=vpc-id,Values=$VPC_ID" --query "RouteTables[*].RouteTableId" --output text 2>/dev/null)
 if [ -n "$MAIN_ROUTE_ID" ]; then
   echo "既存のルートテーブル($MAIN_ROUTE_ID)をimportします"
-  terraform import aws_internet_gateway.sample_gw "$MAIN_ROUTE_ID"
+  terraform import aws_route.internet_access "$MAIN_ROUTE_ID"
 else
   echo "ルートテーブルがないので作成します"
 fi
